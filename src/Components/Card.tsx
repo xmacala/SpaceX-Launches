@@ -1,6 +1,7 @@
 import React from 'react';
 import './Card.css'
 import {useNavigate} from 'react-router-dom'
+import {AiFillStar} from 'react-icons/ai'
 
 function Card({ spacexData }) {
 
@@ -25,10 +26,13 @@ function Card({ spacexData }) {
         </div>
         <div className="button-container">
             <button 
+              className='view'
               onClick={() => {
                 navigate("/informations", {state: {spacexData}})
             }}>View more</button>
+            <button id='fav' className='favourite'><AiFillStar/></button>
         </div>
+        
     </div>
   );
 }

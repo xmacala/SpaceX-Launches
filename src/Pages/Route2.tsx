@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import './Route2.css'
+import {AiFillStar} from 'react-icons/ai'
 
 export default function Route1(){
 
@@ -14,7 +15,17 @@ export default function Route1(){
     var old_link = spacexData.links.video_link.split("/",4)
     var link = "https://www.youtube.com/embed/" + old_link[3]
 
-    console.log(spacexData)
+    function makeFav(){
+        var btn1 = document.getElementById('fav');
+        if(btn1){
+          if(btn1.style.color == "grey"){
+            btn1.style.color = "yellow"
+          }
+          else {
+            btn1.style.color = "grey"
+          }
+        }
+      }
 
     if(spacexData.ships.length > 0){
         return(
@@ -22,6 +33,9 @@ export default function Route1(){
                 <div className="id_miss-container">
                         <h1>{spacexData.id}</h1>
                         <h2>{spacexData.mission_name}</h2>
+                </div>
+                <div>
+                <button id='fav' className='favourite' onClick={() => makeFav()}><AiFillStar/></button>
                 </div>
                 <div className="date-container">
                     <h3>Date: {year_month_day[2]}. {year_month_day[1]}. {year_month_day[0]}</h3>
@@ -49,7 +63,8 @@ export default function Route1(){
                     <iframe src={spacexData.links.article_link} width="560" height="315"></iframe>
                 </div>
                 <div className="button-container">
-                    <button 
+                    <button
+                    className='back'
                     onClick={() => {
                         navigate(-1)
                     }}>Back</button>
@@ -60,21 +75,27 @@ export default function Route1(){
     else{
         return(
             <div className= "info-container">
-                <div className="id-container">
+                <div className="id_miss-container">
                     <h1>{spacexData.id}</h1>
-                </div>
-                <div className="miss_name-container">
                     <h2>{spacexData.mission_name}</h2>
                 </div>
+
+                <div>
+                    <button id='fav' className='favourite'><AiFillStar/></button>
+                </div>
+
                 <div className="date-container">
                     <h3>Date: {year_month_day[2]}. {year_month_day[1]}. {year_month_day[0]}</h3>
                 </div>
+
                 <div className="site_name-container">
                     <p><strong>Site name:</strong> {spacexData.launch_site.site_name_long}</p>
                 </div>
+
                 <div className="rocket_info-container">
                     <p><strong>Rocket:</strong></p>
                     <ul>
+                        <li>Name: {spacexData.rocket.rocket_name}</li>
                         <li>Height: {spacexData.rocket.rocket.height.meters} meters</li>
                         <li>Mass: {spacexData.rocket.rocket.mass.kg} kg</li>
                         <li>Number of landing legs: {spacexData.rocket.rocket.landing_legs.number}</li>
@@ -82,16 +103,20 @@ export default function Route1(){
                         <li>{spacexData.rocket.rocket.description}</li>
                     </ul>
                 </div>
+
                 <div className="iframes-container">
-                    <iframe title='Youtube viedo link' src={link} width="560" height="315" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameBorder="0"></iframe>
-                    <iframe src={spacexData.links.article_link} width="560" height="315" frameBorder="0"></iframe>
+                    <iframe title='Youtube viedo link' src={link} width="560" height="315" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                    <iframe src={spacexData.links.article_link} width="560" height="315"></iframe>
                 </div>
+
                 <div className="button-container">
-                    <button 
+                    <button
+                    className='back'
                     onClick={() => {
                         navigate(-1)
                     }}>Back</button>
                 </div>
+
             </div>
         )
     }
