@@ -1,0 +1,15 @@
+.Route1{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -11%);
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+h1{
+    padding: 20px;
+    padding-top: 0px;
+}
+
